@@ -15,6 +15,15 @@ This repository contains a systematic comparative analysis of custom symmetric c
 *   **Predictor Network:** Deep Residual MLP mapping 1280D $\rightarrow$ 1024D $\rightarrow$ 768D.
 *   **Loss Function:** Combines cross-modal cosine similarity with a KL-divergence spread penalty ($\alpha$) to successfully prevent representation collapse.
 
+## Dataset: Flickr8k
+
+This project utilizes the **Flickr8k** dataset, a standard benchmark for multimodal vision-language tasks and image retrieval. 
+
+*   **Volume:** 8,000 images depicting a variety of everyday actions, people, and scenes.
+*   **Annotations:** 5 highly descriptive, human-annotated captions per image (40,000 total captions).
+*   **Splits:** Evaluated using the official benchmark splits: 6,000 training images, 1,000 validation images, and 1,000 test images.
+*   **Role in Architecture:** The dataset's 1-to-5 image-to-text ratio is explicitly leveraged in the custom **Multi-Positive Mixture Loss**. Instead of treating an image's alternate captions as false negatives (which penalizes the model for valid semantic matches), all 5 captions are treated as positive soft-labels to stabilize the KL-Divergence spread penalty and map the visual feature accurately into the text distribution.
+
 ## Repository Structure
 
 *   `CLIP_symmetric256.ipynb`: Baseline dual-encoder contrastive model mapping to 256D.
